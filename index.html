@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PopCalAI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000000;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      width: 320px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #4CAF50;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #cccccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #333;
+      border: 1px solid #555;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      text-align: center;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PopCalAI</h1>
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input type="text" id="location" placeholder="Enter location">
+    </div>
+    <div class="form-group">
+      <label for="currentPopulation">Current Population:</label>
+      <input type="number" id="currentPopulation" placeholder="Enter current population">
+    </div>
+    <div class="form-group">
+      <label for="growthRate">Annual Growth Rate (%):</label>
+      <input type="number" id="growthRate" placeholder="Enter growth rate">
+    </div>
+    <div class="form-group">
+      <label for="years">Number of Years:</label>
+      <input type="number" id="years" placeholder="Enter number of years">
+    </div>
+    <button onclick="calculatePopulation()">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculatePopulation() {
+      const location = document.getElementById("location").value.trim();
+      const current = parseFloat(document.getElementById("currentPopulation").value);
+      const rate = parseFloat(document.getElementById("growthRate").value);
+      const years = parseInt(document.getElementById("years").value);
+      const resultDiv = document.getElementById("result");
+
+      if (!location || isNaN(current) || isNaN(rate) || isNaN(years)) {
+        resultDiv.textContent = "Please fill in all fields correctly.";
+        return;
+      }
+
+      const futurePopulation = current * Math.pow((1 + rate / 100), years);
+      resultDiv.textContent = `Estimated Population of ${location} after ${years} years: ${Math.round(futurePopulation).toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>
